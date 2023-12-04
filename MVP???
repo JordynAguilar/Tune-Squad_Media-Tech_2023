@@ -1,1 +1,99 @@
-Murray MVP fo sho.
+#include <Servo.h>
+Servo A, B, C, D, E;  // create servo variable
+
+// setup button A
+const int buttonAPin = 2;
+int buttonAState = 0;
+int lastButtonAState = 0;
+
+// setup button B
+const int buttonBPin = 3;
+int buttonBState = 0;
+int lastButtonBState = 0;
+
+// setup button C
+const int buttonCPin = 4;
+int buttonCState = 0;
+int lastButtonCState = 0;
+
+// setup button D
+const int buttonDPin = LED_BUILTIN;
+int buttonDState = 0;
+int lastButtonDState = 0;
+int ledState = LOW;
+
+//setup button E
+//const int buttonEPin = 6;
+//int buttonEState = 0;
+//int lastButtonEState = 0;
+
+// sets up the servo attachments
+void setup() {
+  pinMode(buttonAPin, INPUT);
+  pinMode(buttonBPin, INPUT);
+  pinMode(buttonCPin, INPUT);
+  pinMode(buttonDPin, OUTPUT);
+  pinMode(buttonEPin, INPUT);
+  A.attach(9);  // attaches the servo on pin 3
+  B.attach(10);
+  C.attach(11);
+  D.attach(12);
+  //E.attach(13);
+}
+
+//Read state to make servo move or not
+void loop() {
+  buttonAState = digitalRead(buttonAPin);
+  buttonBState = digitalRead(buttonBPin);
+  buttonCState = digitalRead(buttonCPin);
+  buttonDState = digitalRead(buttonDPin);
+  buttonEState = digitalRead(buttonEPin);
+  //Read Button A
+  if (buttonAState != lastButtonAState) {
+    if (buttonAState == HIGH) {
+      A.write(-180);
+    } else if (buttonAState == LOW) {
+      A.write(180);
+    }
+  }
+
+  if (buttonBState != lastButtonBState) {
+    if (buttonBState == HIGH) {
+      B.write(-90);
+    } else if (buttonBState == LOW) {
+      B.write(90);
+    }
+  }
+
+
+  if (buttonCState != lastButtonCState) {
+    if (buttonCState == HIGH) {
+      C.write(-180);
+    } else if (buttonCState == LOW) {
+      C.write(180);
+    }
+  }
+
+  if (buttonDState != lastButtonDState) {
+    if (buttonDState == HIGH) {
+      ledState = HIGH;
+    } else if (buttonDState == LOW) {
+      ledState = LOW;
+    }
+  }
+
+  if (buttonEState != lastButtonEState) {
+    if (buttonEState == HIGH) {
+      E.write(-180);
+    } else if (buttonEState == LOW) {
+      E.write(180);
+    }
+  }
+
+  lastButtonAState = buttonAState;
+  lastButtonBState = buttonBState;
+  lastButtonCState = buttonCState;
+  lastButtonDState = buttonDState;
+  lastButtonEState = buttonEState;
+}
+
